@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"moduleResolution":"node",
+		"module": "es6",
+		"target": "es6",
+		"resolveJsonModule": true,
+		"noImplicitAny": true,
+		"strict": true,
+		"sourceMap": true,
+		"types": ["node", "@wdio/globals/types", "@wdio/jasmine-framework", "jest"],
+		"esModuleInterop": true,
+	},
+	"exclude": [
+		"node_modules"
+	]
+}
