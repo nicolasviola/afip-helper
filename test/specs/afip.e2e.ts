@@ -1,5 +1,5 @@
 import baseData from '../../data/baseData.js';
-import data from '../../data/invoiceData.js';
+import data, {numberoOfIterartionsOfTheSameInvoice} from '../../data/invoiceData.js';
 import {
 	login,
 	invoiceCreation,
@@ -20,8 +20,8 @@ describe('AFIP Invoice creation', () => {
 	})
 
 	it('Create all invoices listed in invoiceData file', async () => {
-		for (let index = 0; index < data.length; index++) {
-			const el = data[index];
+		for (let index = 0; index < (+numberoOfIterartionsOfTheSameInvoice || data.length); index++) {
+			const el = numberoOfIterartionsOfTheSameInvoice ? data[0] : data[index];
 			baseData.test && await browser.pause(1000)
 			await $(invoiceCreation.createInvoiceButton).click();
 			baseData.test && await browser.pause(1000)
@@ -32,12 +32,14 @@ describe('AFIP Invoice creation', () => {
 			await selectInvoice.selectByAttribute('value', el.selectInvoiceValue);
 			await browser.pause(1000)
 			await $(invoiceCreation.continueButton).click();
-			await $(emissionData.voucherDate).setValue(el.voucherDate);
+			el.voucherDate && await $(emissionData.voucherDate).setValue(el.voucherDate);
 			const selectBoxDate = await $(emissionData.conceptsToInclude);
 			await selectBoxDate.selectByAttribute('value', el.conceptsToIncludePosition);
-			await $(emissionData.periodBilledFrom).setValue(el.periodBilledFrom);
-			await $(emissionData.periodBilledTo).setValue(el.periodBilledTo);
-			await $(emissionData.dueDateForPayment).setValue(el.dueDateForPayment);
+			if(el.conceptsToIncludePosition === '2') {
+				el.periodBilledFrom && await $(emissionData.periodBilledFrom).setValue(el.periodBilledFrom);
+				el.periodBilledTo && await $(emissionData.periodBilledTo).setValue(el.periodBilledTo);
+				el.dueDateForPayment && await $(emissionData.dueDateForPayment).setValue(el.dueDateForPayment);
+			}
 			baseData.test && await browser.pause(1000)
 			await $(emissionData.continueButton).click();
 			const selectBoxCostumerType = await $(recipentData.selectBoxCostumerType);
@@ -45,9 +47,13 @@ describe('AFIP Invoice creation', () => {
 			await $(recipentData.typeOfPay).click();
 			await $(recipentData.continueButton).click();
 			baseData.test && await browser.pause(1000);
-			await $(operationData.code).setValue(el.code);
+			el.code && await $(operationData.code).setValue(el.code);
 			await $(operationData.serviceOrProduct).setValue(el.serviceOrProduct);
 			await $(operationData.unitPrice).setValue(el.unitPrice);
+			if(el.ivaType) {
+				const selectBoxIVAType = await $(operationData.selectIVATypeBox);
+				await selectBoxIVAType.selectByAttribute('value', el.ivaType);
+			}
 			baseData.test && await browser.pause(1000);
 			await $(operationData.continueButton).click();
 			baseData.test && await browser.pause(1000);

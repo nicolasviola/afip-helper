@@ -33,7 +33,8 @@ export const operationData = {
 	code: '//*[@id="idoperacion"]/tbody/tr[2]/td[1]/input[1]',
 	serviceOrProduct: '//*[@id="detalle_descripcion1"]',
 	unitPrice: '//*[@id="detalle_precio1"]',
-	continueButton: '//*[@id="contenido"]/form/input[8]'
+	continueButton: '//*[@id="contenido"]/form/input[8]',
+	selectIVATypeBox: '//*[@id="detalle_tipo_iva1"]'
 }
 
 export const dataSummary = {
