@@ -1,15 +1,22 @@
+import {
+	selectInvoiceValue,
+	conceptsToIncludePosition,
+	ivaConditionPosition,
+	voucherIvaType
+} from '../enums'
+
 export interface Data {
 	pointOfSaleValue: string;
-	selectInvoiceValue: string;
+	selectInvoiceValue: selectInvoiceValue;
 	voucherDate?: string;
-	conceptsToIncludePosition: string;
+	conceptsToIncludePosition: conceptsToIncludePosition;
 	periodBilledFrom?: string;
 	periodBilledTo?: string;
 	dueDateForPayment?: string;
-	ivaConditionPosition: string;
+	ivaConditionPosition: ivaConditionPosition;
 	code?: string;
 	serviceOrProduct: string;
 	unitPrice: string;
-	ivaType?: string;
+	ivaType?: voucherIvaType;
 }
 

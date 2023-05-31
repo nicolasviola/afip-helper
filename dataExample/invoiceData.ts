@@ -1,4 +1,10 @@
 import { Data } from '../types'
+import {
+	selectInvoiceValue,
+	conceptsToIncludePosition,
+	ivaConditionPosition,
+	voucherIvaType
+} from '../enums/index.js'
 
 const currentMonth = "Abril/23"
 const voucherDate = "01/05/2023" // only required on service vouchers
@@ -18,26 +24,26 @@ export const numberoOfIterartionsOfTheSameInvoice = ''
 const data: Data[] = [
 	{ // First Voucher - service example
 		pointOfSaleValue: "2",
-		selectInvoiceValue: "2",
+		selectInvoiceValue: selectInvoiceValue.voucherTypeC,
 		voucherDate: voucherDate,
-		conceptsToIncludePosition: "2",
+		conceptsToIncludePosition: conceptsToIncludePosition.services,
 		periodBilledFrom: dateFrom,
 		periodBilledTo: dateTo,
 		dueDateForPayment: dueDateForPayment,
-		ivaConditionPosition: "5",
+		ivaConditionPosition: ivaConditionPosition.finalConsumer,
 		code: "001",
 		serviceOrProduct: `Description - ${currentMonth}`,
 		unitPrice: "29000"
 	},
 	{ // Second Voucher - product example
 		pointOfSaleValue: "4",
-		selectInvoiceValue: "19",
+		selectInvoiceValue: selectInvoiceValue.voucherTypeB,
 		voucherDate: voucherDate,
-		conceptsToIncludePosition: "1",
-		ivaConditionPosition: "5",
+		conceptsToIncludePosition: conceptsToIncludePosition.products,
+		ivaConditionPosition: ivaConditionPosition.finalConsumer,
 		serviceOrProduct: 'Venta de productos varios',
 		unitPrice: "30000",
-		ivaType: '5'
+		ivaType: voucherIvaType.twentyOne
 	}
 // You can continue adding vouchers
 ]

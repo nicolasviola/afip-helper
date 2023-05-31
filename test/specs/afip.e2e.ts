@@ -8,6 +8,9 @@ import {
 	operationData,
 	dataSummary,
 } from '../../selectors/index.js';
+import {
+	conceptsToIncludePosition,
+} from '../../enums/index.js'
 
 describe('AFIP Invoice creation', () => {
 	it('Login with valid credentials', async () => {
@@ -35,7 +38,7 @@ describe('AFIP Invoice creation', () => {
 			el.voucherDate && await $(emissionData.voucherDate).setValue(el.voucherDate);
 			const selectBoxDate = await $(emissionData.conceptsToInclude);
 			await selectBoxDate.selectByAttribute('value', el.conceptsToIncludePosition);
-			if(el.conceptsToIncludePosition === '2') {
+			if(el.conceptsToIncludePosition === conceptsToIncludePosition.products) {
 				el.periodBilledFrom && await $(emissionData.periodBilledFrom).setValue(el.periodBilledFrom);
 				el.periodBilledTo && await $(emissionData.periodBilledTo).setValue(el.periodBilledTo);
 				el.dueDateForPayment && await $(emissionData.dueDateForPayment).setValue(el.dueDateForPayment);
