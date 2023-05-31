@@ -1,7 +1,7 @@
 # afip-helper
 
 Automation bot to create invoice in the AFIP system. This system is only designed to:
-* Create generic type C invoices to final consumers.
+* Create generic invoices to final consumers.
 * To pay in cash.
 
 ## Installation
