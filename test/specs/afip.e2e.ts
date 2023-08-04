@@ -1,5 +1,5 @@
 import baseData from '../../data/baseData.js';
-import data, {numberoOfIterartionsOfTheSameInvoice} from '../../data/invoiceData.js';
+import data, {numberOfIterartionsOfTheSameInvoice} from '../../data/invoiceData.js';
 import {
 	login,
 	invoiceCreation,
@@ -23,8 +23,8 @@ describe('AFIP Invoice creation', () => {
 	})
 
 	it('Create all invoices listed in invoiceData file', async () => {
-		for (let index = 0; index < (+numberoOfIterartionsOfTheSameInvoice || data.length); index++) {
-			const el = numberoOfIterartionsOfTheSameInvoice ? data[0] : data[index];
+		for (let index = 0; index < (+numberOfIterartionsOfTheSameInvoice || data.length); index++) {
+			const el = numberOfIterartionsOfTheSameInvoice ? data[0] : data[index];
 			baseData.test && await browser.pause(1000)
 			await $(invoiceCreation.createInvoiceButton).click();
 			baseData.test && await browser.pause(1000)
@@ -38,7 +38,7 @@ describe('AFIP Invoice creation', () => {
 			el.voucherDate && await $(emissionData.voucherDate).setValue(el.voucherDate);
 			const selectBoxDate = await $(emissionData.conceptsToInclude);
 			await selectBoxDate.selectByAttribute('value', el.conceptsToIncludePosition);
-			if(el.conceptsToIncludePosition === conceptsToIncludePosition.products) {
+			if(el.conceptsToIncludePosition === conceptsToIncludePosition.services) {
 				el.periodBilledFrom && await $(emissionData.periodBilledFrom).setValue(el.periodBilledFrom);
 				el.periodBilledTo && await $(emissionData.periodBilledTo).setValue(el.periodBilledTo);
 				el.dueDateForPayment && await $(emissionData.dueDateForPayment).setValue(el.dueDateForPayment);
